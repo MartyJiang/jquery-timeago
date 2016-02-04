@@ -25,17 +25,27 @@
     factory(jQuery);
   }
 }(function ($) {
-  $.timeago = function(timestamp) {
-    if (timestamp instanceof Date) {
-      return inWords(timestamp);
-    } else if (typeof timestamp === "string") {
-      return inWords($.timeago.parse(timestamp));
-    } else if (typeof timestamp === "number") {
-      return inWords(new Date(timestamp));
-    } else {
-      return inWords($.timeago.datetime(timestamp));
-    }
-  };
+  $.timeago = function(fromTime, toTime) {
+      if (!toTime) {
+        var toTime = new Date();
+      } else {
+        var insFrom = fromTime instanceof Date;
+        var insTo   = toTime   instanceof Date;
+        if (insFrom === insTo) {
+            return inWords(fromTime, toTime);
+        } else {
+            return inWords([fromTime, toTime].map(function (t) {
+                if (typeof t === "string") {
+                    return $.timeago.parse(t);
+                } else if (typeof t === "number") {
+                    return inWords(new Date(t));
+                } else {
+                    return inWords($.timeago.datetime(t));
+                }
+            }));
+        }
+      }
+  }
   var $t = $.timeago;
 
   $.extend($.timeago, {
@@ -216,7 +226,7 @@
   }
 
   function distance(date) {
-    return (new Date().getTime() - date.getTime());
+    return (date[1].getTime() - date[0].getTime());
   }
 
   // fix for IE6 suckage
