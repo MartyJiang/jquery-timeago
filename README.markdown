@@ -14,6 +14,6 @@ var toTime   = new Date();
 $.timeago(fromTime, toTime);
 ```
 [More detail](http://github.com/rmm5t/jquery-timeago)
+
 [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
-Copyright (c) 2008-2015, Ryan McGeary (ryan -[at]- mcgeary [*dot*] org)
