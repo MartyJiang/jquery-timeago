@@ -12,6 +12,7 @@ formatted dates and times embedded in your HTML (à la microformats).
 var fromTime = '2013-12-21';
 var toTime   = new Date();
 $.timeago(fromTime, toTime);
+// Note: The agruments fromTime, toTime can be String, Date, number and don't need same type
 ```
 [More detail](http://github.com/rmm5t/jquery-timeago)
 
